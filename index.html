@@ -73,8 +73,9 @@
   .brand { display: flex; align-items: center; gap: 10px; color: var(--chalk); font: 400 23px/1 var(--display); margin-right: auto; }
   .brand:hover { text-decoration: none; }
   .brand img { width: 28px; height: 28px; }
-  .nav nav { display: flex; gap: 22px; }
-  .nav nav a { color: var(--fog); font-size: 15px; }
+  .nav nav { display: flex; align-items: center; gap: 22px; }
+  .nav nav a { display: flex; color: var(--fog); font-size: 15px; }
+  .nav nav svg { width: 22px; height: 22px; fill: currentColor; }
   .nav nav a:hover { color: var(--chalk); text-decoration: none; }
   @media (max-width: 760px) { .nav nav { display: none; } }
 
@@ -121,6 +122,8 @@
   .page { flex: 1; margin: 24px; padding: 38px clamp(22px, 4vw, 46px) 48px; background: var(--paper); color: var(--paper-ink); border-radius: 2px; box-shadow: 0 1px 0 rgba(0, 0, 0, .4), 0 22px 44px -20px rgba(0, 0, 0, .7); font: 16.5px/1.5 var(--serif); text-align: justify; hyphens: auto; }
   .page h3 { font: 700 1.2em/1.3 var(--serif); color: inherit; margin-bottom: .7em; text-align: left; }
   .page .num { display: inline-block; min-width: 1.6em; }
+  .page ul { margin: .7em 0 0; padding-left: 1.4em; text-align: left; }
+  .page ul li + li { margin-top: .2em; }
   .page .late { transition: opacity .25s; }
   .js .page .late:not(.shown) { opacity: 0; }
   .eq { position: relative; margin: .8em 0; padding: 0 2.5em; text-align: center; }
@@ -247,7 +250,7 @@
       <a href="#features">Features</a>
       <a href="#install">Install</a>
       <a href="#versions">Versions</a>
-      <a href="https://github.com/toniesteves/tex">GitHub</a>
+      <a href="https://github.com/toniesteves/tex" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
     </nav>
     <a class="btn btn-amber btn-sm" href="https://github.com/toniesteves/tex/releases/latest">Download</a>
   </div>
@@ -278,7 +281,12 @@
             <li><span class="c">\begin</span>{<span class="a">equation</span>}</li>
             <li>  <span class="m" data-w="e1">\operatorname{Var}(\hat\theta_n)</span> <span class="m">=</span> <span class="m" data-w="e2">\frac{\sigma^2}{n}</span>.</li>
             <li><span class="c">\end</span>{<span class="a">equation</span>}</li>
-            <li data-pair="p2" data-typed>Table~<span data-w="r2"><span class="c">\ref</span>{<span class="a">tab:mc</span>}</span> confirms it with <span class="m" data-w="m1">$10^5$</span> draws.</li>
+            <li data-pair="p2" data-typed="1">Table~<span data-w="r2"><span class="c">\ref</span>{<span class="a">tab:mc</span>}</span> confirms it with <span class="m" data-w="m1">$10^5$</span> draws.</li>
+            <li data-typed="2"></li>
+            <li data-typed="2"><span class="c">\begin</span>{<span class="a">itemize</span>}</li>
+            <li data-typed="2" data-pair="p3">  <span class="c">\item</span> the standard error is <span class="m" data-w="m2">$\sigma/\sqrt{n}$</span>;</li>
+            <li data-typed="2" data-pair="p3">  <span class="c">\item</span> halving it takes <span class="m" data-w="m3">$4n$</span> draws.</li>
+            <li data-typed="2"><span class="c">\end</span>{<span class="a">itemize</span>}</li>
           </ol>
         </div>
         <div class="pane pdf">
@@ -287,7 +295,11 @@
             <h3 data-pair="h"><span class="num">3</span>Results</h3>
             <p data-pair="p1">The estimator of Section <span data-w="r1">2</span> is unbiased, and its variance falls with the sample size:</p>
             <div class="eq"><span data-w="e1">Var(<span class="hat">𝜃</span><sub><i>n</i></sub>)</span>&nbsp;=&nbsp;<span data-w="e2" class="frac"><span>𝜎<sup>2</sup></span><span><i>n</i></span></span>.<span class="eqno">(4)</span></div>
-            <p class="late" data-pair="p2">Table <span data-w="r2">1</span> confirms it with <span data-w="m1">10<sup>5</sup></span> draws.</p>
+            <p class="late" data-step="1" data-pair="p2">Table <span data-w="r2">1</span> confirms it with <span data-w="m1">10<sup>5</sup></span> draws.</p>
+            <ul class="late" data-step="2" data-pair="p3">
+              <li>the standard error is <span data-w="m2">𝜎/√<i>n</i></span>;</li>
+              <li>halving it takes <span data-w="m3">4<i>n</i></span> draws.</li>
+            </ul>
           </article>
         </div>
         <div class="status" aria-live="polite">
@@ -305,8 +317,8 @@
       <p class="intro">Most LaTeX documents are a folder: a <code>main.tex</code>, a file per chapter, figures and a <code>.bib</code>. Tex opens that folder and leaves it as it was.</p>
       <div class="trio">
         <div>
-          <h3>Under 3 MB</h3>
-          <p>It uses the web view your system already has. No bundled browser, no Electron.</p>
+          <h3>Fast, and written in Rust</h3>
+          <p>A Rust core on Tauri, not Electron. It opens in a moment, stays light on memory and keeps the editor responsive while TeX works in the background.</p>
         </div>
         <div>
           <h3>A clean folder</h3>
@@ -364,8 +376,8 @@
 
   <section class="band">
     <div class="wrap">
-      <h2>Git, <em>inside the editor.</em></h2>
-      <p class="intro">The Git panel in the sidebar lists what changed since the last commit. Commit, push and pull from there.</p>
+      <h2>Every draft of your paper, <em>kept.</em></h2>
+      <p class="intro">Version control comes built in, with Git. The panel in the sidebar lists what changed since the last commit. Commit, push and pull from there.</p>
       <dl class="grid grid-2">
         <div>
           <dt>Clone or start a repository</dt>
@@ -543,7 +555,7 @@ npm run tauri build -- --bundles deb</pre><button class="copy" type="button"><sp
   function wordsOf(list) { return Array.prototype.concat.apply([], Array.prototype.map.call(list, words)); }
   function pair(a, b) { a.partner = b; b.partner = a; }
 
-  ["h", "p1", "p2"].forEach(function (p) {
+  ["h", "p1", "p2", "p3"].forEach(function (p) {
     var a = wordsOf(src.querySelectorAll('[data-pair="' + p + '"]')), b = wordsOf(page.querySelectorAll('[data-pair="' + p + '"]'));
     a.forEach(function (w, i) { if (b[i]) pair(w, b[i]); });
   });
@@ -558,41 +570,61 @@ npm run tauri build -- --bundles deb</pre><button class="copy" type="button"><sp
     p.classList.add("hit");
   });
 
-  // Type the last line, then compile about a second after the typing stops.
-  var bar = demo.querySelector(".status"), st = bar.querySelector(".st");
-  var line = src.querySelector("[data-typed]"), late = page.querySelector(".late");
-  function finish() { line.classList.add("shown"); late.classList.add("shown"); }
-  function type(done) {
-    var nodes = [], walk = document.createTreeWalker(line, NodeFilter.SHOW_TEXT);
-    while (walk.nextNode()) nodes.push(walk.currentNode);
-    var full = nodes.map(function (n) { var d = n.data; n.data = ""; return d; });
-    var caret = document.createElement("span");
-    caret.className = "caret";
-    line.append(caret);
-    line.classList.add("shown");
-    var i = 0, k = 0;
-    (function step() {
-      while (i < nodes.length && k === full[i].length) { i++; k = 0; }
-      if (i === nodes.length) return done();
-      nodes[i].data = full[i].slice(0, ++k);
-      setTimeout(step, full[i][k - 1] === " " ? 110 : 40 + Math.random() * 55);
+  // Type the new lines in two bursts, each compiled about a second after the typing stops. Then start over.
+  var bar = demo.querySelector(".status"), st = bar.querySelector(".st"), tab = demo.querySelector(".tab");
+  var typed = src.querySelectorAll("[data-typed]"), late = page.querySelectorAll(".late");
+  var caret = document.createElement("span");
+  caret.className = "caret";
+  function show(list, on) { list.forEach(function (el) { el.classList.toggle("shown", on); }); }
+  function finish() { show(typed, true); show(late, true); }
+  function type(lines, done) {
+    var l = 0;
+    (function next() {
+      if (l === lines.length) return done();
+      var line = lines[l++], nodes = [], walk = document.createTreeWalker(line, NodeFilter.SHOW_TEXT);
+      while (walk.nextNode()) nodes.push(walk.currentNode);
+      var full = nodes.map(function (n) { var d = n.data; n.data = ""; return d; });
+      line.append(caret);
+      line.classList.add("shown");
+      var i = 0, k = 0;
+      (function step() {
+        while (i < nodes.length && k === full[i].length) { i++; k = 0; }
+        if (i === nodes.length) return setTimeout(next, 280);
+        nodes[i].data = full[i].slice(0, ++k);
+        setTimeout(step, full[i][k - 1] === " " ? 110 : 40 + Math.random() * 55);
+      })();
     })();
+  }
+  function burst(n, done) {
+    tab.classList.add("dirty");
+    type(src.querySelectorAll('[data-typed="' + n + '"]'), function () {
+      setTimeout(function () {
+        bar.classList.add("busy");
+        st.textContent = "Compiling…";
+        setTimeout(function () {
+          show(page.querySelectorAll('.late[data-step="' + n + '"]'), true);
+          bar.classList.remove("busy");
+          st.textContent = "Compiled in 0.4 s";
+          done();
+        }, 450);
+      }, 1000);
+    });
   }
   function play() {
     setTimeout(function () {
-      demo.querySelector(".tab").classList.add("dirty");
-      type(function () {
+      burst(1, function () {
         setTimeout(function () {
-          bar.classList.add("busy");
-          st.textContent = "Compiling…";
-          setTimeout(function () {
-            finish();
-            bar.classList.remove("busy");
-            st.textContent = "Compiled in 0.4 s";
-          }, 450);
-        }, 1000);
+          burst(2, function () { setTimeout(reset, 6000); });
+        }, 900);
       });
     }, 600);
+  }
+  function reset() {
+    show(typed, false);
+    show(late, false);
+    tab.classList.remove("dirty");
+    caret.remove();
+    play();
   }
 
   if (matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
