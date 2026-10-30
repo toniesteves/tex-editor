@@ -252,7 +252,7 @@
       <a href="#versions">Versions</a>
       <a href="https://github.com/toniesteves/tex" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
     </nav>
-    <a class="btn btn-amber btn-sm" href="https://github.com/toniesteves/tex/releases/latest">Download</a>
+    <a class="btn btn-amber btn-sm" href="https://github.com/toniesteves/tex/releases/latest" data-download>Download</a>
   </div>
 </header>
 
@@ -264,10 +264,10 @@
         <h1>Meet Tex.<br> <em>LaTeX, typeset<br> as you type.</em></h1>
         <p class="lede">Tex is a light LaTeX editor for Linux. The PDF follows the text you haven’t saved yet, a click takes you from any word on the page to the same word in the source, and errors are underlined on the line that caused them.</p>
         <div class="actions">
-          <a class="btn btn-amber" href="https://github.com/toniesteves/tex/releases/latest">Download for Linux (.deb)</a>
+          <a class="btn btn-amber" href="https://github.com/toniesteves/tex/releases/latest" data-download><span>Download Tex <span data-version>0.1.18</span> for Linux (.deb)</span></a>
           <a class="btn btn-line" href="https://github.com/toniesteves/tex">Code on GitHub</a>
         </div>
-        <p class="meta"><span>v<span data-version>0.1.10</span></span><span>Debian, Ubuntu, Linux Mint (amd64)</span><span>Free, MIT license</span></p>
+        <p class="meta"><span>v<span data-version>0.1.18</span></span><span>Debian, Ubuntu, Linux Mint (amd64)</span><span>Free, MIT license</span></p>
       </div>
 
       <div class="demo" role="group" aria-label="Tex demo: LaTeX source and the compiled page">
@@ -472,7 +472,7 @@
         <li>
           <h3>Install it with apt</h3>
           <p>In the folder where you saved it. apt also brings <code>latexmk</code> and a basic TeX Live if they are missing.</p>
-          <div class="term"><pre>sudo apt install ./<span data-deb>Tex_0.1.10_amd64.deb</span></pre><button class="copy" type="button"><span class="idle">Copy</span><span class="ok">Copied</span></button></div>
+          <div class="term"><pre>sudo apt install ./<span data-deb>Tex_0.1.18_amd64.deb</span></pre><button class="copy" type="button"><span class="idle">Copy</span><span class="ok">Copied</span></button></div>
         </li>
         <li>
           <h3>Open a folder</h3>
@@ -638,8 +638,8 @@ npm run tauri build -- --bundles deb</pre><button class="copy" type="button"><sp
     seen.observe(demo);
   }
 
-  // Versions, and the version and file name in the install command, from GitHub releases.
-  fetch("https://api.github.com/repos/toniesteves/tex/releases?per_page=8")
+  // The five latest versions, the download links, and the version and file name in the install command, from GitHub releases.
+  fetch("https://api.github.com/repos/toniesteves/tex/releases?per_page=5")
     .then(function (r) { return r.ok ? r.json() : []; })
     .then(function (all) {
       var list = all.filter(function (r) { return !r.draft; });
@@ -648,9 +648,12 @@ npm run tauri build -- --bundles deb</pre><button class="copy" type="button"><sp
       var v = /\d+\.\d+\.\d+/.exec(latest.tag_name);
       if (v) document.querySelectorAll("[data-version]").forEach(function (el) { el.textContent = v[0]; });
       var deb = (latest.assets || []).filter(function (a) { return /\.deb$/.test(a.name); })[0];
-      if (deb) document.querySelectorAll("[data-deb]").forEach(function (el) { el.textContent = deb.name; });
+      if (deb) {
+        document.querySelectorAll("[data-deb]").forEach(function (el) { el.textContent = deb.name; });
+        document.querySelectorAll("[data-download]").forEach(function (el) { el.href = deb.browser_download_url; });
+      }
       var ol = document.getElementById("releases");
-      list.forEach(function (r) {
+      list.slice(0, 5).forEach(function (r) {
         var li = document.createElement("li"), a = document.createElement("a"), t = document.createElement("time");
         a.href = r.html_url;
         a.textContent = r.name || r.tag_name;
