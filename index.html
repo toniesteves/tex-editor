@@ -171,8 +171,8 @@
   .shot figcaption { margin-top: 16px; color: var(--dim); font-size: 14.5px; text-align: center; }
 
   /* Four themes, cascaded like windows on a desktop. */
-  .stack { container-type: inline-size; position: relative; aspect-ratio: 100 / 66; margin-top: clamp(56px, 8vw, 96px); }
-  .stack figure { position: absolute; width: 72cqw; margin: 0; left: calc(var(--i) * 9.33cqw); top: calc(var(--i) * 6cqw); z-index: var(--i); border-radius: 10px; overflow: hidden; background: var(--raise); box-shadow: 0 0 0 1px var(--rule-2), 0 30px 60px -24px rgba(0, 0, 0, .75); transition: transform .2s; }
+  .stack { --w: min(1240px, 100vw - 2 * var(--gutter)); container-type: inline-size; position: relative; width: var(--w); margin-inline: calc((100% - var(--w)) / 2); aspect-ratio: 100 / 67; margin-top: clamp(56px, 8vw, 96px); }
+  .stack figure { position: absolute; width: 76cqw; margin: 0; left: calc(var(--i) * 8cqw); top: calc(var(--i) * 5.5cqw); z-index: var(--i); border-radius: 10px; overflow: hidden; background: var(--raise); box-shadow: 0 0 0 1px var(--rule-2), 0 30px 60px -24px rgba(0, 0, 0, .75); transition: transform .2s; }
   .stack figure:hover { z-index: 5; }
   .stack figcaption { height: 2.6cqw; min-height: 22px; display: flex; align-items: center; gap: 6px; padding: 0 12px; font: 600 clamp(11px, 1.1cqw, 13px)/1 var(--sans); color: var(--fog); border-bottom: 1px solid var(--rule); }
   .stack figcaption::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--dim); box-shadow: 13px 0 0 var(--dim), 26px 0 0 var(--dim); margin-right: 34px; }
@@ -311,7 +311,7 @@
     </div>
   </section>
 
-  <section class="band" id="features">
+  <section class="band">
     <div class="wrap">
       <h2>Small, and <em>out of your way.</em></h2>
       <p class="intro">Most LaTeX documents are a folder: a <code>main.tex</code>, a file per chapter, figures and a <code>.bib</code>. Tex opens that folder and leaves it as it was.</p>
@@ -416,7 +416,7 @@
     </div>
   </section>
 
-  <section class="band">
+  <section class="band" id="features">
     <div class="wrap">
       <h2>And the <em>everyday details.</em></h2>
       <dl class="grid">
