@@ -171,14 +171,15 @@
   .shot figcaption { margin-top: 16px; color: var(--dim); font-size: 14.5px; text-align: center; }
 
   /* Four themes, cascaded like windows on a desktop. */
-  .stack { container-type: inline-size; position: relative; aspect-ratio: 100 / 64.6; margin-top: clamp(56px, 8vw, 96px); }
+  .stack { container-type: inline-size; position: relative; aspect-ratio: 100 / 61.8; margin-top: clamp(56px, 8vw, 96px); }
   .stack figure { position: absolute; width: 64cqw; margin: 0; left: calc(var(--i) * 12cqw); top: calc(var(--i) * 7cqw); z-index: var(--i); border-radius: 10px; overflow: hidden; background: var(--raise); box-shadow: 0 0 0 1px var(--rule-2), 0 30px 60px -24px rgba(0, 0, 0, .75); transition: transform .2s; }
   .stack figure:hover { z-index: 5; }
   .stack figcaption { height: 2.6cqw; min-height: 22px; display: flex; align-items: center; gap: 6px; padding: 0 12px; font: 600 clamp(11px, 1.1cqw, 13px)/1 var(--sans); color: var(--fog); border-bottom: 1px solid var(--rule); }
   .stack figcaption::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--dim); box-shadow: 13px 0 0 var(--dim), 26px 0 0 var(--dim); margin-right: 34px; }
   .stack img { width: 100%; }
+  .shot a, .stack a { display: block; cursor: zoom-in; }
   @media (max-width: 700px) {
-    .stack { aspect-ratio: 100 / 76; }
+    .stack { aspect-ratio: 100 / 74; }
     .stack figure { width: 82cqw; left: calc(var(--i) * 6cqw); top: calc(var(--i) * 6cqw); }
   }
 
@@ -330,7 +331,7 @@
         </div>
       </div>
       <figure class="shot">
-        <img src="assets/screenshots/project.png" width="1280" height="820" loading="lazy" alt="A Tex project window: files on the left, the LaTeX source in the middle and the compiled PDF on the right">
+        <a href="assets/screenshots/project.png" target="_blank" title="Open full size"><img src="assets/screenshots/project.png" width="2560" height="1528" loading="lazy" alt="A Tex project window: files on the left, the LaTeX source in the middle and the compiled PDF on the right"></a>
         <figcaption>The whole project in one window: files and outline, the source, and the PDF compiling beside it.</figcaption>
       </figure>
     </div>
@@ -397,7 +398,7 @@
         </div>
       </dl>
       <figure class="shot">
-        <img src="assets/screenshots/git.png" width="1280" height="820" loading="lazy" alt="The Git panel: the branch with one commit to push, the commit history with a merged branch, Pull and Push, the commit message box, and two changed files">
+        <a href="assets/screenshots/git.png" target="_blank" title="Open full size"><img src="assets/screenshots/git.png" width="2560" height="1528" loading="lazy" alt="The Git panel: the branch with one commit to push, the commit history with a merged branch, Pull and Push, the commit message box, and two changed files"></a>
         <figcaption>One commit to push, the history of a merged branch, and two changes waiting for a commit.</figcaption>
       </figure>
     </div>
@@ -408,10 +409,10 @@
       <h2>Light, dark, <em>or one of the classics.</em></h2>
       <p class="intro">Monokai and Dracula come built in. Or choose System, and Tex follows your desktop.</p>
       <div class="stack">
-        <figure style="--i: 0"><figcaption>Light</figcaption><img src="assets/screenshots/theme-light.png" width="1280" height="820" loading="lazy" alt="Tex in the Light theme"></figure>
-        <figure style="--i: 1"><figcaption>Dark</figcaption><img src="assets/screenshots/theme-dark.png" width="1280" height="820" loading="lazy" alt="Tex in the Dark theme"></figure>
-        <figure style="--i: 2"><figcaption>Monokai</figcaption><img src="assets/screenshots/theme-monokai.png" width="1280" height="820" loading="lazy" alt="Tex in the Monokai theme"></figure>
-        <figure style="--i: 3"><figcaption>Dracula</figcaption><img src="assets/screenshots/theme-dracula.png" width="1280" height="820" loading="lazy" alt="Tex in the Dracula theme"></figure>
+        <figure style="--i: 0"><figcaption>Light</figcaption><a href="assets/screenshots/theme-light.png" target="_blank" title="Open full size"><img src="assets/screenshots/theme-light.png" width="2560" height="1528" loading="lazy" alt="Tex in the Light theme"></a></figure>
+        <figure style="--i: 1"><figcaption>Dark</figcaption><a href="assets/screenshots/theme-dark.png" target="_blank" title="Open full size"><img src="assets/screenshots/theme-dark.png" width="2560" height="1528" loading="lazy" alt="Tex in the Dark theme"></a></figure>
+        <figure style="--i: 2"><figcaption>Monokai</figcaption><a href="assets/screenshots/theme-monokai.png" target="_blank" title="Open full size"><img src="assets/screenshots/theme-monokai.png" width="2560" height="1528" loading="lazy" alt="Tex in the Monokai theme"></a></figure>
+        <figure style="--i: 3"><figcaption>Dracula</figcaption><a href="assets/screenshots/theme-dracula.png" target="_blank" title="Open full size"><img src="assets/screenshots/theme-dracula.png" width="2560" height="1528" loading="lazy" alt="Tex in the Dracula theme"></a></figure>
       </div>
     </div>
   </section>
