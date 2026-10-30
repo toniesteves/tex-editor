@@ -183,7 +183,8 @@
   }
 
   .split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(36px, 6vw, 80px); align-items: center; }
-  @media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
+  .split.present { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); }
+  @media (max-width: 900px) { .split, .split.present { grid-template-columns: 1fr; } }
   .keys { margin: 32px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 12px 18px; align-items: baseline; color: var(--fog); font-size: 16px; }
   .keys dt { display: flex; flex-wrap: wrap; gap: 5px; justify-content: flex-end; }
   .keys dd { margin: 0; }
@@ -195,13 +196,29 @@
   .p-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 14px; }
   .p-side { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
   .p-label { color: var(--dim); font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
-  .slide { aspect-ratio: 4 / 3; background: var(--paper); color: var(--paper-ink); border-radius: 3px; padding: 7% 8%; font: 15px/1.35 var(--serif); display: flex; flex-direction: column; gap: .7em; overflow: hidden; }
+  .slide { aspect-ratio: 4 / 3; background: var(--paper); color: var(--paper-ink); border-radius: 3px; padding: 7% 8%; font: 16px/1.35 var(--serif); display: flex; flex-direction: column; gap: .7em; overflow: hidden; }
   .slide-title { font-size: 1.25em; color: #33339f; }
   .slide .eq { margin: .2em 0; padding: 0; }
   .slide ul { margin: 0; padding-left: 1.1em; }
   .slide-next { font-size: 8.5px; }
+  .slide.center { justify-content: center; align-items: center; }
+  .slide table { margin: .1em auto 0; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .slide th, .slide td { padding: .12em .9em; text-align: right; font-weight: 400; }
+  .slide thead th { border-bottom: .06em solid currentColor; }
+  .slide.enter { animation: slide-in .5s ease-out; }
+  @keyframes slide-in { from { opacity: 0; transform: translateX(7%); } }
+  .keys kbd.press { animation: press .7s ease-out; }
+  @keyframes press { 0%, 35% { background: var(--amber); color: #17140c; transform: translateY(1px); } }
+  .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3vw, 32px); margin-top: clamp(56px, 8vw, 96px); }
+  .pair .shot { margin: 0; }
+  @media (max-width: 700px) { .pair { grid-template-columns: 1fr; } }
   .p-notes { color: var(--chalk); font-size: 13.5px; line-height: 1.45; }
-  @media (max-width: 520px) { .p-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) {
+    .p-grid { grid-template-columns: 1fr; }
+    .p-top { flex-wrap: wrap; row-gap: 6px; }
+    .p-top b { font-size: 17px; }
+    .p-top .clock { flex-wrap: wrap; gap: 4px 12px; }
+  }
 
   .grid { margin: 56px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px 40px; }
   .grid > div { padding-top: 16px; border-top: 1px solid var(--rule); }
@@ -337,7 +354,7 @@
   </section>
 
   <section class="band">
-    <div class="wrap split">
+    <div class="wrap split present">
       <div>
         <h2>Present from <em>the same window.</em></h2>
         <p class="intro">Press <kbd>F5</kbd>. Your Beamer slides go full screen on the projector, and your own screen shows the current and next slide, your notes, a timer and the clock.</p>
@@ -351,11 +368,37 @@
       </div>
       <div class="presenter" aria-hidden="true">
         <div class="p-top">
-          <span>5 / 18</span>
-          <span class="clock"><span>Timer<b>12:48</b></span><span>Clock<b>10:30</b></span></span>
+          <span data-p="count">5 / 18</span>
+          <span class="clock"><span>Timer<b data-p="timer">12:48</b></span><span>Clock<b data-p="clock">10:30</b></span></span>
         </div>
         <div class="p-grid">
-          <div class="slide">
+          <div class="p-current">
+            <div class="slide">
+              <div class="slide-title">Variance of the estimator</div>
+              <div class="eq">Var(<span class="hat">𝜃</span><sub><i>n</i></sub>)&nbsp;=&nbsp;<span class="frac"><span>𝜎<sup>2</sup></span><span><i>n</i></span></span></div>
+              <ul>
+                <li>unbiased for every <i>n</i></li>
+                <li>the error falls as 1/√<i>n</i></li>
+              </ul>
+            </div>
+          </div>
+          <div class="p-side">
+            <span class="p-label">Next</span>
+            <div class="p-next"><div class="slide slide-next"><div class="slide-title">Simulation results</div></div></div>
+            <span class="p-label">Notes</span>
+            <p class="p-notes" data-p="notes">Ask the room how many draws it takes to halve the error.</p>
+          </div>
+        </div>
+        <div class="deck" hidden>
+          <div class="slide" data-n="4" data-notes="Define the estimator before any result.">
+            <div class="slide-title">The estimator</div>
+            <div class="eq"><span class="hat">𝜃</span><sub><i>n</i></sub>&nbsp;=&nbsp;<span class="frac"><span>1</span><span><i>n</i></span></span>&thinsp;∑&thinsp;<i>X</i><sub><i>i</i></sub></div>
+            <ul>
+              <li>the <i>X</i><sub><i>i</i></sub> are independent draws</li>
+              <li>each with mean 𝜃 and variance 𝜎<sup>2</sup></li>
+            </ul>
+          </div>
+          <div class="slide" data-n="5" data-notes="Ask the room how many draws it takes to halve the error.">
             <div class="slide-title">Variance of the estimator</div>
             <div class="eq">Var(<span class="hat">𝜃</span><sub><i>n</i></sub>)&nbsp;=&nbsp;<span class="frac"><span>𝜎<sup>2</sup></span><span><i>n</i></span></span></div>
             <ul>
@@ -363,11 +406,23 @@
               <li>the error falls as 1/√<i>n</i></li>
             </ul>
           </div>
-          <div class="p-side">
-            <span class="p-label">Next</span>
-            <div class="slide slide-next"><div class="slide-title">Simulation results</div></div>
-            <span class="p-label">Notes</span>
-            <p class="p-notes">Ask the room how many draws it takes to halve the error.</p>
+          <div class="slide" data-n="6" data-notes="Each row is 10⁵ simulations. The variance drops tenfold per row.">
+            <div class="slide-title">Simulation results</div>
+            <table>
+              <thead><tr><th><i>n</i></th><th>Var(<span class="hat">𝜃</span><sub><i>n</i></sub>)</th></tr></thead>
+              <tbody><tr><td>10<sup>2</sup></td><td>0.0101</td></tr><tr><td>10<sup>3</sup></td><td>0.0010</td></tr><tr><td>10<sup>4</sup></td><td>0.0001</td></tr></tbody>
+            </table>
+          </div>
+          <div class="slide" data-n="7" data-notes="Three points to remember. Slow down here.">
+            <div class="slide-title">Conclusion</div>
+            <ul>
+              <li>unbiased</li>
+              <li>consistent as <i>n</i> → ∞</li>
+              <li>four times the draws halve the error</li>
+            </ul>
+          </div>
+          <div class="slide center" data-n="8" data-notes="Leave five minutes for questions.">
+            <div class="slide-title">Questions?</div>
           </div>
         </div>
       </div>
@@ -400,6 +455,41 @@
         <img src="assets/screenshots/git.png" width="2560" height="1528" loading="lazy" alt="The Git panel: the branch with one commit to push, the commit history with a merged branch, Pull and Push, the commit message box, and two changed files">
         <figcaption>One commit to push, the history of a merged branch, and two changes waiting for a commit.</figcaption>
       </figure>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <h2>Every project, <em>in its colour.</em></h2>
+      <p class="intro">Tag the projects on the Welcome screen (thesis, papers, teaching, whatever you keep apart) and one click on a tag shows only those.</p>
+      <dl class="grid grid-2">
+        <div>
+          <dt>Tag from the list</dt>
+          <dd>The tag button on each project, or a right-click, adds and removes tags. A project can have several.</dd>
+        </div>
+        <div>
+          <dt>Your names, your colours</dt>
+          <dd>Name a tag and pick one of eight colours. The × on a tag deletes it.</dd>
+        </div>
+        <div>
+          <dt>Filter with one click</dt>
+          <dd>The tags above the list show only the projects that carry them.</dd>
+        </div>
+        <div>
+          <dt>Tagged projects stay</dt>
+          <dd>The list keeps the latest projects you opened, and the tagged ones never fall off it.</dd>
+        </div>
+      </dl>
+      <div class="pair">
+        <figure class="shot">
+          <img src="assets/screenshots/tags-menu.png" width="1176" height="1060" loading="lazy" alt="Recent projects with coloured tags, and the tag menu of one project: Topology and Teaching checked, and New Tag">
+          <figcaption>Tag a project from its row.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/screenshots/tags-filter.png" width="1176" height="1060" loading="lazy" alt="Recent projects filtered by the Topology tag: three projects">
+          <figcaption>One click on Topology, and only those projects remain.</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -636,6 +726,42 @@ npm run tauri build -- --bundles deb</pre><button class="copy" type="button"><sp
       play();
     }, { threshold: .45 });
     seen.observe(demo);
+  }
+
+  // The presenter view gives a short talk: a slide every few seconds, the timer running, → lit on each advance.
+  var presenter = document.querySelector(".presenter");
+  var deck = presenter.querySelectorAll(".deck .slide"), at = 1;
+  var current = presenter.querySelector(".p-current"), upcoming = presenter.querySelector(".p-next");
+  var field = function (name) { return presenter.querySelector('[data-p="' + name + '"]'); };
+  var arrow = document.querySelector(".keys kbd");
+  var two = function (n) { return (n < 10 ? "0" : "") + n; };
+  var seconds = 12 * 60 + 48, minutes = 10 * 60 + 30;
+  function advance() {
+    at = (at + 1) % deck.length;
+    var slide = deck[at].cloneNode(true), next = deck[(at + 1) % deck.length].cloneNode(true);
+    slide.classList.add("enter");
+    next.classList.add("slide-next");
+    current.replaceChildren(slide);
+    upcoming.replaceChildren(next);
+    field("count").textContent = deck[at].dataset.n + " / 18";
+    field("notes").textContent = deck[at].dataset.notes;
+    arrow.classList.remove("press");
+    void arrow.offsetWidth;
+    arrow.classList.add("press");
+  }
+  function tick() {
+    if (++seconds % 60 === 0) minutes++;
+    field("timer").textContent = two(Math.floor(seconds / 60)) + ":" + two(seconds % 60);
+    field("clock").textContent = two(Math.floor(minutes / 60)) + ":" + two(minutes % 60);
+  }
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
+    var talk = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      talk.disconnect();
+      setInterval(tick, 1000);
+      setInterval(advance, 4500);
+    }, { threshold: .4 });
+    talk.observe(presenter);
   }
 
   // The five latest versions, the download links, and the version and file name in the install command, from GitHub releases.
