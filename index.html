@@ -285,10 +285,10 @@
         <h1>Meet Tex.<br> <em>LaTeX, typeset<br> as you type.</em></h1>
         <p class="lede">Tex is a light LaTeX editor for Linux. The PDF follows the text you haven’t saved yet, a click takes you from any word on the page to the same word in the source, and errors are underlined on the line that caused them.</p>
         <div class="actions">
-          <a class="btn btn-amber" href="https://github.com/toniesteves/tex/releases/latest" data-download><span>Download Tex <span data-version>0.1.18</span> for Linux (.deb)</span></a>
+          <a class="btn btn-amber" href="https://github.com/toniesteves/tex/releases/latest" data-download><span>Download Tex <span data-version>0.1.25</span> for Linux (.deb)</span></a>
           <a class="btn btn-line" href="https://github.com/toniesteves/tex">Code on GitHub</a>
         </div>
-        <p class="meta"><span>v<span data-version>0.1.18</span></span><span>Debian, Ubuntu, Linux Mint (amd64)</span><span>Free, MIT license</span></p>
+        <p class="meta"><span>v<span data-version>0.1.25</span></span><span>Debian, Ubuntu, Linux Mint (amd64)</span><span>Free, MIT license</span></p>
       </div>
 
       <div class="demo" role="group" aria-label="Tex demo: LaTeX source and the compiled page">
@@ -566,7 +566,7 @@
         <li>
           <h3>Install it with apt</h3>
           <p>In the folder where you saved it. apt also brings <code>latexmk</code> and a basic TeX Live if they are missing.</p>
-          <div class="term"><pre>sudo apt install ./<span data-deb>Tex_0.1.18_amd64.deb</span></pre><button class="copy" type="button"><span class="idle">Copy</span><span class="ok">Copied</span></button></div>
+          <div class="term"><pre>sudo apt install ./<span data-deb>Tex_0.1.25_amd64.deb</span></pre><button class="copy" type="button"><span class="idle">Copy</span><span class="ok">Copied</span></button></div>
         </li>
         <li>
           <h3>Open a folder</h3>
@@ -589,7 +589,10 @@ npm run tauri build -- --bundles deb</pre><button class="copy" type="button"><sp
     <div class="wrap">
       <h2>Versions</h2>
       <p class="intro">Each release has its notes and its .deb on GitHub.</p>
-      <ol class="releases" id="releases" hidden></ol>
+      <ol class="releases" id="releases">
+        <li><a href="https://github.com/toniesteves/tex/releases/tag/v0.1.25">Tex 0.1.25</a><time datetime="2026-10-31T17:00:15Z">2026-10-31</time></li>
+        <li><a href="https://github.com/toniesteves/tex/releases/tag/v0.1.18">Tex 0.1.18</a><time datetime="2026-10-30T19:53:09Z">2026-10-30</time></li>
+      </ol>
       <p class="more"><a href="https://github.com/toniesteves/tex/releases">All releases on GitHub →</a></p>
     </div>
   </section>
@@ -783,6 +786,7 @@ npm run tauri build -- --bundles deb</pre><button class="copy" type="button"><sp
         document.querySelectorAll("[data-download]").forEach(function (el) { el.href = deb.browser_download_url; });
       }
       var ol = document.getElementById("releases");
+      ol.replaceChildren();
       list.slice(0, 5).forEach(function (r) {
         var li = document.createElement("li"), a = document.createElement("a"), t = document.createElement("time");
         a.href = r.html_url;
@@ -792,7 +796,6 @@ npm run tauri build -- --bundles deb</pre><button class="copy" type="button"><sp
         li.append(a, t);
         ol.append(li);
       });
-      ol.hidden = false;
     })
     .catch(function () {});
 })();
